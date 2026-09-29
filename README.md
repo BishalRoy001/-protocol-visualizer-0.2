@@ -1,63 +1,62 @@
 # TCP/IP Protocol Flow Visualizer
 
-A small FastAPI app with a minimal front end that shows how a request travels the network
-(DNS, TCP, then HTTP or SMTP) as a live 3D scene plus a step-by-step sequence diagram.
+A sleek FastAPI application with a modern front-end that illustrates how network packets travel across layers (DNS, TCP, and Application protocols like HTTP, SMTP, or HLS Streaming) using an interactive 3D scene alongside a step-by-step sequence log.
 
-- **Backend:** `main.py` (FastAPI) serves the page and three endpoints:
+- **Backend:** `main.py` (FastAPI) serves the application and exposes three core endpoints:
   `POST /api/browse`, `POST /api/mail`, `POST /api/stream`.
-  Each returns `{"sequence": [{type, sender, receiver, protocol, msg}, ...]}`.
-- **Frontend:** `index.html` (one file, no build step). Three.js and fonts load from a CDN.
-  If the API can't be reached, the page shows an "Offline demo" copy of the same data.
+  Each endpoint returns an ordered sequence array: `{"sequence": [{type, sender, receiver, protocol, msg}, ...]}`.
+- **Frontend:** `index.html` (single-file UI, no complex build pipeline). Utilizes Three.js and modern CSS variables for a dark/light mode interface. Includes an offline fallback demo mode if the backend is unreachable.
 
-## Version history
+---
 
-This is the **updated version of `app_layer_workflow01`**.
+## Visual Previews & Version Comparison
 
-| Version | Layers covered |
-| --- | --- |
-| `app_layer_workflow01` (previous) | Application layer view only |
-| **This version** | Application layer **plus the Transport layer** (TCP three-way handshake) |
+### 1. Previous Version (`app_layer_workflow01`)
+* **Layers Covered:** Application Layer view only (DNS resolution + HTTP/SMTP/Streaming message logs).
+* **UI Focus:** Standard two-panel text logs with manual replay controls.
+
+![Previous Version Screenshot](screenshot-v1.png)
+*(Placeholder: Add your screenshot for the previous application-layer-only version)*
+
+### 2. Updated Version (Current)
+* **Layers Covered:** Application Layer **plus Transport Layer** (TCP three-way handshakes: `SYN`, `SYN-ACK`, `ACK`).
+* **UI Focus:** Modern minimal dashboard featuring an interactive 3D Three.js node topology canvas (Client, DNS Server, Remote Server) with animated packet routing.
+
+![Updated Version Screenshot](screenshot-v2.png)
+*(Placeholder: Add your screenshot for the updated 3D TCP/IP visualizer version)*
+
+---
+
+## Version History
+
+| Version | Layers Covered | UI & Architecture |
+| :--- | :--- | :--- |
+| `app_layer_workflow01` (Previous) | Application layer view only | Standard dual-panel log view |
+| **Current Version** | Application layer **+ Transport layer** | Live 3D node topology + Sequence timeline |
 
 ### Roadmap
 
-The goal is to cover every layer of the TCP/IP model in future updates:
+Future updates aim to cover the entire TCP/IP stack:
 
 | Layer | Status |
-| --- | --- |
+| :--- | :--- |
 | Application (DNS, HTTP, SMTP, HLS streaming) | Done |
-| Transport (TCP) | Done in this version |
+| Transport (TCP 3-Way Handshake) | Done |
 | Internet (IP) | Planned |
-| Link / Network access | Planned |
+| Link / Network Access | Planned |
 
-## Notes
+---
 
-Only the DNS lookup in `/api/browse` is real (`socket.gethostbyname` on the server).
-The TCP, HTTP and SMTP steps are illustrative text.
+## Technical Notes
 
-## Run locally
+* **Live vs. Simulated Data:** The DNS lookup in `/api/browse` is live and dynamic (`socket.gethostbyname` on the server host). TCP connection handshakes and application payloads use descriptive simulated traces for educational clarity.
+
+---
+
+## Run Locally
 
 ```bash
+git clone [https://github.com/BishalRoy001/App_layer_workflow.01.git](https://github.com/BishalRoy001/App_layer_workflow.01.git)
+cd App_layer_workflow.01
 pip install -r requirements.txt
 uvicorn main:app --reload
-```
-
-Open http://localhost:8000. The top bar shows **Live backend** when the API responds.
-
-## Deploy on Render
-
-1. Push this repo to GitHub.
-2. In Render: New > Web Service > pick the repo.
-3. Build command: `pip install -r requirements.txt`
-4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-
-(`render.yaml` already contains these settings, so a Blueprint deploy also works.)
-Free instances sleep when idle, so the first request can take up to a minute.
-
-## Files
-
-| File | Purpose |
-| --- | --- |
-| `main.py` | FastAPI backend |
-| `index.html` | UI (3D stage, sequence diagram, playback controls) |
-| `requirements.txt` | Python dependencies |
-| `render.yaml` | Optional Render config |
