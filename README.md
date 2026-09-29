@@ -17,7 +17,7 @@ A sleek FastAPI application with a modern front-end that illustrates how network
 
 ![Previous Version](previous.png)
 
-### 2.(`protocol-visualizer-0.2`)
+### 2. Updated Version (`protocol-visualizer-0.2`)
 * **Layers Covered:** Application Layer **plus Transport Layer** (TCP three-way handshakes: `SYN`, `SYN-ACK`, `ACK`).
 * **UI Focus:** Modern minimal dashboard featuring an interactive 3D Three.js node topology canvas (Client, DNS Server, Remote Server) with animated packet routing.
 
