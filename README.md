@@ -9,6 +9,28 @@ A small FastAPI app with a minimal front end that shows how a request travels th
 - **Frontend:** `index.html` (one file, no build step). Three.js and fonts load from a CDN.
   If the API can't be reached, the page shows an "Offline demo" copy of the same data.
 
+## Version history
+
+This is the **updated version of `app_layer_workflow01`**.
+
+| Version | Layers covered |
+| --- | --- |
+| `app_layer_workflow01` (previous) | Application layer view only |
+| **This version** | Application layer **plus the Transport layer** (TCP three-way handshake) |
+
+### Roadmap
+
+The goal is to cover every layer of the TCP/IP model in future updates:
+
+| Layer | Status |
+| --- | --- |
+| Application (DNS, HTTP, SMTP, HLS streaming) | Done |
+| Transport (TCP) | Done in this version |
+| Internet (IP) | Planned |
+| Link / Network access | Planned |
+
+## Notes
+
 Only the DNS lookup in `/api/browse` is real (`socket.gethostbyname` on the server).
 The TCP, HTTP and SMTP steps are illustrative text.
 
