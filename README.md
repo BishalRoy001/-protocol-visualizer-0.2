@@ -8,6 +8,8 @@ A sleek FastAPI application with a modern front-end that illustrates how network
 - **Frontend:** `index.html` (single-file UI, no complex build pipeline). Utilizes Three.js and modern CSS variables for a dark/light mode interface. Includes an offline fallback demo mode if the backend is unreachable.
 
 ---
+**live demo** https://protocol-visualizer-0-2.onrender.com
+---
 
 ## Visual Previews & Version Comparison
 
